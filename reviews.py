@@ -19,6 +19,7 @@ name_text = []
 star_text = []
 date_text = []
 comment_text = []
+#data_text = []
 
 with open("reviews.csv", "w") as csv_file:
   csv_writer = writer(csv_file)
@@ -37,7 +38,10 @@ with open("reviews.csv", "w") as csv_file:
       star_text.append(star.text)
       date_text.append(date.text)
       comment_text.append(comment.text)
-      data = [(name_text), (star_text), (date_text), (comment_text)]
-  csv_writer.writerows(data)
+  data = [(name_text), (star_text), (date_text), (comment_text)]
+
+  #To write data in columns instead of rows
+  new_data = zip(*data)
+  csv_writer.writerows(new_data)
   
 driver.quit()
