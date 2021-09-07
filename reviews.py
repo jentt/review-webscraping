@@ -19,7 +19,6 @@ name_text = []
 star_text = []
 date_text = []
 comment_text = []
-#data_text = []
 
 with open("reviews.csv", "w") as csv_file:
   csv_writer = writer(csv_file)
@@ -28,14 +27,16 @@ with open("reviews.csv", "w") as csv_file:
 
   for review in reviews:
     names = review.find_elements_by_class_name("css-166la90")
-    stars = review.find_elements_by_xpath("/html/body/div[2]/div[2]/yelp-react-root/div[1]/div[4]/div/div/div[2]/div/div[1]/div[2]/section/div[2]/div/ul/li[2]/div/div[2]/div/div[1]/span/div")
+    #stars = review.find_elements_by_xpath("/html/body/div[2]/div[2]/yelp-react-root/div[1]/div[4]/div/div/div[2]/div/div[1]/div[2]/section/div[2]/div/ul/li[2]/div/div[2]/div/div[1]/span/div")
+    stars = review.find_elements_by_class_name("i-stars__373c0___sZu0")
     dates = review.find_elements_by_class_name("css-e81eai")
     comments = review.find_elements_by_class_name("raw__373c0__tQAx6")
 
     for name, star, date, comment in zip(names, stars, dates, comments):
       print(star.get_attribute("aria-label"))
+      rating =  star.get_attribute("aria-label")
       name_text.append(name.text)
-      star_text.append(star.text)
+      star_text.append(rating)
       date_text.append(date.text)
       comment_text.append(comment.text)
   data = [(name_text), (star_text), (date_text), (comment_text)]
